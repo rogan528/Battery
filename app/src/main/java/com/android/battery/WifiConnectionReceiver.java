@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
+import com.android.battery.utils.BatteryUtils;
+
 public class WifiConnectionReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {

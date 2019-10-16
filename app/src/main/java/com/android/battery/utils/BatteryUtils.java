@@ -1,4 +1,4 @@
-package com.android.battery;
+package com.android.battery.utils;
 
 import android.content.Context;
 import android.content.Intent;
