@@ -1,14 +1,31 @@
 package com.android.battery.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.BatteryManager;
+import android.os.Build;
+import android.os.PowerManager;
+import android.provider.Settings;
 import android.telecom.ConnectionService;
 
 public class BatteryUtils {
+
+    public static void addWhileName(Activity activity){
+
+        PowerManager powerManager = (PowerManager) activity.getSystemService(Context.POWER_SERVICE);
+        //应用是否在白名单中
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if (!powerManager.isIgnoringBatteryOptimizations(activity.getPackageName())){
+                //方法1，启动intent
+                Intent intent = new Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+                activity.startActivity(intent);
+            }
+        }
+    }
 
     /**
      * 是否在充电
