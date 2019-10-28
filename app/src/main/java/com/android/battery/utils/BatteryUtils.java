@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.PowerManager;
@@ -20,8 +21,12 @@ public class BatteryUtils {
         //应用是否在白名单中
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if (!powerManager.isIgnoringBatteryOptimizations(activity.getPackageName())){
-                //方法1，启动intent
+                /*//方法1，启动intent
                 Intent intent = new Intent(Settings.ACTION_IGNORE_BATTERY_OPTIMIZATION_SETTINGS);
+                activity.startActivity(intent);*/
+                //方法2，启动intent
+                Intent intent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+                intent.setData(Uri.parse("package:"+activity.getPackageName()));
                 activity.startActivity(intent);
             }
         }
